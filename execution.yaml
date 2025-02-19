@@ -1,0 +1,26 @@
+# .jx/pipelines/jenkins/ci/pipeline.yaml
+kind: Pipeline
+metadata:
+  name: my-pipeline
+spec:
+  stages:
+    - name: Build
+      steps:
+        - command: |
+            echo "Building the project..."
+            # Add your build commands here, e.g., compiling code
+            ./build.sh
+
+    - name: Test
+      steps:
+        - command: |
+            echo "Running tests..."
+            # Add your test commands here, e.g., running unit tests
+            ./run_tests.sh
+
+    - name: Deploy
+      steps:
+        - command: |
+            echo "Deploying the project..."
+            # Add your deploy commands here
+            ./deploy.sh
