@@ -27,4 +27,30 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 
+                // Run your tests using pytest (or another testing framework if needed)
+                sh './$VIRTUAL_ENV/bin/pytest tests/'
+            }
+        }
+
+        stage('Build Artifact') {
+            steps {
+                // Build the Python package (source distribution)
+                sh './$VIRTUAL_ENV/bin/python setup.py sdist'
+            }
+        }
+
+        stage('Archive Artifact') {
+            steps {
+                // Archive the generated artifacts (e.g., tar.gz files in dist/)
+                archiveArtifacts artifacts: 'dist/*.tar.gz', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up the virtual environment after the job is done
+            sh 'rm -rf $VIRTUAL_ENV'
+        }
+    }
+}
