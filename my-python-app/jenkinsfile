@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    environment {
+        VIRTUAL_ENV = 'venv'
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/your-repo/python-app.git'
+            }
+        }
+
+        stage('Set up Virtual Environment') {
+            steps {
+                sh 'python3 -m venv $VIRTUAL_ENV'
+                sh './$VIRTUAL_ENV/bin/pip install --upgrade pip' // Upgrade pip
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh './$VIRTUAL_ENV/bin/pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 
