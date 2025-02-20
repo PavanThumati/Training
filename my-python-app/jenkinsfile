@@ -33,13 +33,13 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'python3 -m pytest tests/'
+                sh './venv/bin/python3 -m pytest tests/'  // Ensuring the correct Python executable is used
             }
         }
 
         stage('Build Artifact') {
             steps {
-                sh 'python3 setup.py sdist'
+                sh './venv/bin/python3 setup.py sdist'  // Use the virtual environment's Python executable
             }
         }
 
