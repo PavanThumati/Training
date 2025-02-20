@@ -1,48 +1,35 @@
 pipeline {
     agent any
 
-    environment {
-        VIRTUAL_ENV = 'venv'
-    }
-
     stages {
         stage('Clone Repository') {
             steps {
-                // Make sure to use the correct branch name (main, if that's your default branch)
                 git branch: 'main', url: 'https://github.com/PavanThumati/jenkins-Training.git'
-            }
-        }
-
-        stage('Set up Virtual Environment') {
-            steps {
-                sh 'python3 -m venv $VIRTUAL_ENV'
-                sh './$VIRTUAL_ENV/bin/pip install --upgrade pip' // Upgrade pip
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh './$VIRTUAL_ENV/bin/pip install -r requirements.txt'
+                // Install dependencies directly on the system
+                sh 'python3 -m pip install --upgrade pip'
+                sh 'python3 -m pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                // Run your tests using pytest (or another testing framework if needed)
-                sh './$VIRTUAL_ENV/bin/pytest tests/'
+                sh 'python3 -m pytest tests/'
             }
         }
 
         stage('Build Artifact') {
             steps {
-                // Build the Python package (source distribution)
-                sh './$VIRTUAL_ENV/bin/python setup.py sdist'
+                sh 'python3 setup.py sdist'
             }
         }
 
         stage('Archive Artifact') {
             steps {
-                // Archive the generated artifacts (e.g., tar.gz files in dist/)
                 archiveArtifacts artifacts: 'dist/*.tar.gz', fingerprint: true
             }
         }
@@ -50,8 +37,7 @@ pipeline {
 
     post {
         always {
-            // Clean up the virtual environment after the job is done
-            sh 'rm -rf $VIRTUAL_ENV'
+            // Clean up if necessary
         }
     }
 }
