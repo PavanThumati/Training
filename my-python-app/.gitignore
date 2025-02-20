@@ -1,0 +1,16 @@
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+*.egg-info/
+
+# IDE settings
+.idea/
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
