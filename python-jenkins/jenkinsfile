@@ -1,0 +1,70 @@
+pipeline {
+    environment {
+        registry = "harish981/python-jenkins"  // Docker Hub image repository
+        registryCredential = 'dockerhub'       // Docker Hub credentials ID in Jenkins
+        githubCredential = 'github'            // GitHub credentials ID in Jenkins
+    }
+    agent any
+
+    stages {
+        
+        stage('Checkout') {
+            steps {
+                // Checkout the GitHub repository
+                git branch: 'main',
+                    credentialsId: githubCredential,
+                    url: 'https://github.com/harish981/python.git'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Run tests using pytest
+                sh "pytest testRoutes.py"
+            }
+        }
+        
+        stage('Clean Up') {
+            steps {
+                // Stop and remove any containers related to the job
+                sh returnStatus: true, script: 'docker stop $(docker ps -a -q --filter "name=${JOB_NAME}")'
+                sh returnStatus: true, script: 'docker rm $(docker ps -a -q --filter "name=${JOB_NAME}")'
+                
+                // Remove Docker images related to the registry
+                sh returnStatus: true, script: 'docker rmi $(docker images -q --filter "reference=${registry}") --force'
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                script {
+                    // Construct the image name with the registry and build ID
+                    img = "${registry}:${env.BUILD_ID}"
+                    println("Building Docker image: ${img}")
+                    
+                    // Build the Docker image
+                    dockerImage = docker.build("${img}")
+                }
+            }
+        }
+
+        stage('Push To DockerHub') {
+            steps {
+                script {
+                    // Push the Docker image to Docker Hub
+                    docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                // Remove any existing container with the same name and run a new container
+                sh returnStatus: true, script: 'docker rm -f ${JOB_NAME} || true'
+                sh label: '', script: "docker run -d --name ${JOB_NAME} -p 5000:5000 ${img}"
+            }
+        }
+    }
+}
