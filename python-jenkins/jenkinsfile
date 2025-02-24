@@ -1,8 +1,8 @@
 pipeline {
     environment {
-        registry = "harish981/python-jenkins"  // Docker Hub image repository
-        registryCredential = 'dockerhub'       // Docker Hub credentials ID in Jenkins
-        githubCredential = 'github'            // GitHub credentials ID in Jenkins
+        registry = "pavanthumati/python-jenkins"  // Docker Hub image repository
+        registryCredential = '83e2b9a9-fed9-4cf2-b6ea-a0dffd78a705'       // Docker Hub credentials ID in Jenkins
+        githubCredential = 'fbe91dc1-4d3a-4763-ba88-af543d53bf87'            // GitHub credentials ID in Jenkins
     }
     agent any
 
@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Checkout the GitHub repository
                 git branch: 'main',
-                    credentialsId: githubCredential,
+                    credentialsId: fbe91dc1-4d3a-4763-ba88-af543d53bf87,
                     url: 'https://github.com/harish981/python.git'
             }
         }
