@@ -11,9 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the GitHub repository
-                branch: 'main',
-                    credentialsId: fbe91dc1-4d3a-4763-ba88-af543d53bf87,
-                    url: 'https://github.com/harish981/python.git'
+                git branch: 'main', url: 'https://github.com/PavanThumati/jenkins-Training.git'
             }
         }
         
