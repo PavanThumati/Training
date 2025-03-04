@@ -18,8 +18,8 @@ stages {
         steps {
             script {
                 echo "Running container using image: ${DOCKER_IMAGE}"
-                sh "docker stop my-python-project-container"
-                sh "docker rm my-python-project-container"
+                //sh "docker stop my-python-project-container"
+                //sh "docker rm my-python-project-container"
                 sh "docker run -d -it --name my-python-project-container -p 5000:80 ${DOCKER_IMAGE} sleep 50s"
             }
         }
