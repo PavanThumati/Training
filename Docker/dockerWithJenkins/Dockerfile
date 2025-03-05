@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app/
 
 # Copy the requirements file into the container
-COPY requirements.txt /app/
+COPY Docker/dockerWithJenkins/requirements.txt /app/
 
 # Install any needed dependencies
 RUN pip install --no-cache-dir -r requirements.txt
