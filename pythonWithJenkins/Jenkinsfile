@@ -33,7 +33,7 @@ pipeline {
                     sh '''
                         bash -c "source venv/bin/activate"
                         export PYTHONPATH=$(pwd)  # Set PYTHONPATH to the current directory
-                        venv/bin/pytest tests/
+                        venv/bin/pytest pythonWithJenkins/tests/
                     '''
                 }
             }
