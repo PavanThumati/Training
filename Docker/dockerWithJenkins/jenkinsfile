@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh 'pwd'           // Print the working directory
                 sh 'ls -al'        // List all files to confirm the Dockerfile is present
-                sh 'docker build -p 5000:5000 -f Docker/dockerWithJenkins/Dockerfile -t $DOCKER_IMAGE .'  // Build the Docker image
+                sh 'docker build -f Docker/dockerWithJenkins/Dockerfile -t $DOCKER_IMAGE .'  // Build the Docker image
             }
         }
 
