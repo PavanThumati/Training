@@ -20,7 +20,7 @@ pipeline {
                     // Use bash to activate the virtual environment and install dependencies
                     sh '''
                         bash -c "source venv/bin/activate"
-                        venv/bin/pip install -r requirements.txt
+                        venv/bin/pip install -r pythonWithJenkins/requirements.txt
 			venv/bin/pip install setuptools
                     '''
                 }
