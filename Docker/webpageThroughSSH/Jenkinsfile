@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/PavanThumati/Training.git'
+                git url: 'https://github.com/PavanThumati/Training.git', branch: 'main'
             }
         }
         stage('Docker Login') {
@@ -27,7 +27,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    sh "docker build -f Docker/webpageThroughSSH/Dockerfile -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 }
             }
         }
