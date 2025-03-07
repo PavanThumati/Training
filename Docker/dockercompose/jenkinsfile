@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'pavanthumati/dockercomposeusingjenkins:latest'
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git url: 'https://github.com/PavanThumati/Training.git', branch: 'main'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'pwd'           // Print the working directory
+                sh 'ls -al'        // List all files to confirm the Dockerfile is present
+                sh 'docker-compose up -d -f Docker/dockercompose/jenkinsfile'  // Build the Docker image   
+
+
+            }
+        }
+
+        
+    }
+}
