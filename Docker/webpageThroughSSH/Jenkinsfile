@@ -27,7 +27,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker pull nginx:latest"
+                    sh "docker pull nginx"
                     sh "docker build -f Docker/webpageThroughSSH/Dockerfile -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 }
             }
