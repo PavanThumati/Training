@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh 'pwd'           // Print the working directory
                 sh 'ls -al'        // List all files to confirm the Dockerfile is present
-                sh 'docker-compose up -d -f Docker/dockercompose/jenkinsfile'  // Build the Docker image   
+                sh 'Docker/dockercompose/docker-compose.yaml up -d'  // Build the Docker image   
 
 
             }
