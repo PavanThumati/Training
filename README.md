@@ -1,3 +1,6 @@
+docker swarm join --token SWMTKN-1-26ne2b6iniz5stpfp59dbha7idzg5whjjtcqiva6v6u5o8i0ap-2bsgt2j19khln8q45tpc24py2 192.168.219.134:2377
+
+
 # jenkins-Training
 pipeline {
     agent any
