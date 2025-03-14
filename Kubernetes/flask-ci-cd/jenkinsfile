@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -f kubernetes/flask-ci-cd/Dockerfile -t pavanthumati/flask-ci-cd:latest .'
+                sh 'docker build -f Kubernetes/flask-ci-cd/Dockerfile -t pavanthumati/flask-ci-cd:latest .'
             }
         }
         stage('Push to Docker Hub') {
@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f kubernetes/flask-ci-cd/k8s-deployment.yaml'
+                sh 'kubectl apply -f Kubernetes/flask-ci-cd/k8s-deployment.yaml'
             }
         }
     }
