@@ -7,7 +7,7 @@ WORKDIR /app
 COPY Kubernetes/flask-ci-cd/requirements.txt /app/
 
 # Upgrade pip
-RUN pip install --upgrade pip
+#RUN pip install --upgrade pip
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
