@@ -1,1 +1,1 @@
-Flask
+Flask==2.0.1  # or any other version that you need
