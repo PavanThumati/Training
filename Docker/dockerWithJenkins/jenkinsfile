@@ -14,8 +14,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'pwd'           // Print the working directory
-                sh 'ls -al'        // List all files to confirm the Dockerfile is present
+                
                 sh 'docker build -f Docker/dockerWithJenkins/Dockerfile -t $DOCKER_IMAGE .'  // Build the Docker image
             }
         }
