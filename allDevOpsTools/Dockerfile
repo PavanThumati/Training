@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the requirements file into the app folder first (this helps with caching dependencies)
-COPY requirements.txt /app/
+COPY allDevOpsTools/requirements.txt /app/
 
 # Install dependencies
 RUN pip install -r requirements.txt
