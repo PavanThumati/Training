@@ -28,8 +28,8 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f allDevOpsTools/flaskapp-ci-cd-deployment.yml --validate=false'
-                sh 'kubectl apply -f allDevOpsTools/flaskapp-ci-cd-service.yml --validate=false'
+                sh 'kubectl apply -f allDevOpsTools/flaskapp-deployment.yml --validate=false'
+                sh 'kubectl apply -f allDevOpsTools/flaskapp-service.yml --validate=false'
                 
             }
         }
