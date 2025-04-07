@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    environment {
+        //KUBECONFIG = credentials('jenkins_config_default')
+        //KUBECONFIG = '/home/master/Desktop/configJenkins/jenkins_config_default'
+        KUBECONFIG = '/home/master/Desktop/configJenkins/jenkins_config_default' 
+        // KUBERNETES_SERVICE_HOST = 'kubernetes.default.svc'
+        // KUBERNETES_SERVICE_PORT = '443'
+    }
+    stages {
+        stage('Clone Code') {
+            steps {
+                git url: 'https://github.com/PavanThumati/Training.git', branch: 'main'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -f allDevOpsTools/Dockerfile -t pavanthumati/flaskapp-ci-cd:latest .'
+            }
+        }
+        stage('Push to Docker Hub') {
+            steps {
+                withDockerRegistry([credentialsId: 'DockerHubCredentials', url: 'https://index.docker.io/v1/']) {
+                    sh 'docker push pavanthumati/flaskapp-ci-cd:latest'
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh 'kubectl apply -f allDevOpsTools/flaskapp-ci-cd-deployment.yml --validate=false'
+                sh 'kubectl apply -f allDevOpsTools/flaskapp-ci-cd-service.yml --validate=false'
+                
+            }
+        }
+    }
+}
