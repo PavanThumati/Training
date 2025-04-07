@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: my-new-flaskapp
-        image: pavanthumati/new-flaskapp
+        image: pavanthumati/flaskapp-ci-cd
         ports:
         - containerPort: 5000
