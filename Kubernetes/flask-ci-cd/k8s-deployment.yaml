@@ -13,7 +13,7 @@ spec:
         app: flask-app
     spec:
       imagePullSecrets:
-        - name: docker-hub-secret
+        - name: DockerHubCredentials
       containers:
         - name: flask-app
           image: pavanthumati/flask-ci-cd:latest
