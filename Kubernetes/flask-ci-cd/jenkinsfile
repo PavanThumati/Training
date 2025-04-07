@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    environment {
+    //environment {
         //KUBECONFIG = credentials('jenkins_config_default')
         // KUBERNETES_SERVICE_HOST = 'kubernetes.default.svc'
         // KUBERNETES_SERVICE_PORT = '443'
-    }
+    //}
     stages {
         stage('Clone Code') {
             steps {
