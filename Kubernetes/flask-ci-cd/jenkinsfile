@@ -29,6 +29,8 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh 'kubectl apply -f Kubernetes/flask-ci-cd/k8s-deployment.yaml --validate=false'
+                sh 'kubectl apply -f Kubernetes/flask-ci-cd/k8s-service.yaml --validate=false'
+                
             }
         }
     }
