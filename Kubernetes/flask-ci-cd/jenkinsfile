@@ -2,6 +2,7 @@ pipeline {
     agent any
     //environment {
         //KUBECONFIG = credentials('jenkins_config_default')
+        KUBECONFIG = '/home/master/Desktop/configJenkins/jenkins_config_default'
         // KUBERNETES_SERVICE_HOST = 'kubernetes.default.svc'
         // KUBERNETES_SERVICE_PORT = '443'
     //}
@@ -24,25 +25,6 @@ pipeline {
             }
         }
 
-//
-//
-        stage('Deploy to Kubernetes sample') {
-            steps {
-                script {
-                    // Use the withCredentials block to securely access the kubeconfig
-                    withCredentials([file(credentialsId: 'jenkins_kubeconfig', variable: 'KUBECONFIG_FILE')]) {
-                        // Set KUBECONFIG environment variable to the file provided by withCredentials
-                        sh 'export KUBECONFIG=$KUBECONFIG_FILE'
-
-                        // Run kubectl commands using the provided kubeconfig
-                        sh 'kubectl get pods'
-                    }
-                }
-            }
-}
-//
-//
-//
         stage('Deploy to Kubernetes') {
             steps {
                 sh 'kubectl apply -f Kubernetes/flask-ci-cd/k8s-deployment.yaml --validate=false'
