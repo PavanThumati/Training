@@ -17,5 +17,5 @@ COPY . /app/
 EXPOSE 5000
 
 # Run the app when the container starts
-CMD ["python", "flaskApp.py"]
-
+#CMD ["python", "flaskApp.py"]
+CMD sleep 60 && python flaskApp.py
