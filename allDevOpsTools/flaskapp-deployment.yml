@@ -17,6 +17,6 @@ spec:
       containers:
       - name: my-new-flaskapp
         image: pavanthumati/flaskapp-ci-cd
-        command: ["/bin/sh", "-c", "sleep 60 && python flaskApp.py"]
+        command: ["/bin/sh", "-c", "python flaskApp.py"]
         ports:
         - containerPort: 5000
