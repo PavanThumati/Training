@@ -9,7 +9,7 @@ COPY allDevOpsTools/requirements.txt /app/
 
 # Install dependencies
 RUN pip install -r requirements.txt
-
+COPY allDevOpsTools/flaskApp.py /app/
 # Copy the rest of the application files
 COPY . /app/
 
