@@ -6,7 +6,7 @@ pipeline {
         //KUBECONFIG = '/home/master/Desktop/configJenkins/jenkins_config_default' 
         // KUBERNETES_SERVICE_HOST = 'kubernetes.default.svc'
         // KUBERNETES_SERVICE_PORT = '443'
-        Docker_hub-cred=""
+        Docker_hub-cred=credentials('dockerhub-cred')
     }
     stages {
         stage('Clone Code') {
